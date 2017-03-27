@@ -37,6 +37,30 @@ public class MyQuickSort {
 
 	}
 	
+	private void quicksort2(int low,int high) {
+		// TODO Auto-generated method stub
+		int i=low;
+		int j=high;
+		int pivot= numArray[low+(high-low)/2];
+		while(i<=j){
+			while(pivot > numArray[i]){
+				i++;
+			}
+			while(pivot < numArray[j]){
+				j--;
+			}
+			swapNumbers(numArray[i], numArray[j]);
+		}
+		
+		if(low <j){
+			quicksort2(low, j);
+		}
+		
+		if(i < high){
+			quicksort2(i, high);
+		}
+
+	}
 	public void swapNumbers(int i, int j){
 		int temp = numArray[i];
 		numArray[i]=numArray[j];
