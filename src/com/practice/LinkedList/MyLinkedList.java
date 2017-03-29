@@ -112,6 +112,21 @@ public class MyLinkedList {
 		return;
 		
 	}
+	/*recursion method to reverse a linked list*/
+	public void reverseLinkedList2(LinkedListNode cur){
+		if(cur==null){
+			return ;
+		}
+		
+		if(cur.next==null){
+			head=cur;
+			return;
+		}
+		reverseLinkedList2(cur.next);
+		cur.next.next=cur;
+		cur.next=null;
+		return;
+	}
 	
 	public static void main(String[] args) {
 		MyLinkedList myLinkedList = new MyLinkedList();
@@ -125,6 +140,8 @@ public class MyLinkedList {
 		myLinkedList.reverseLinkedList();
 		myLinkedList.display();
 		myLinkedList.addNodeAtBegining(6);
+		myLinkedList.display();
+		myLinkedList.reverseLinkedList2(myLinkedList.head);
 		myLinkedList.display();
 		myLinkedList.reverseLinkedList();
 		myLinkedList.display();
