@@ -45,7 +45,7 @@ public class WaysToCoinChange {
 //		int[] v = { 1, 2, 3 };
 //		System.out.println("By Dynamic Programming " + dynamic(v, amount));
 		
-		Map<String,String> map = new HashMap();
+		Map<String,String> map = new HashMap<String, String>();
 		map.put("key", "value");
 		map.put("key1", "va1lue");
 		map.put("key2", "val2ue");

@@ -14,18 +14,24 @@ public class HelloWorld extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-        Button btn = new Button();
+        final Button btn = new Button();
         btn.setText("START");
+        
         btn.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public void handle(ActionEvent event) {
-            	btn.setText("STOP");
-//                System.out.println("Hello World!");
-//            	StopWatch stopWatch = new StopWatch();
-//        		stopWatch.startTimer();
-//        		Thread th = new Thread(stopWatch);
-//        		th.start();
+            	if(btn.getText().equals("START")){
+            		
+            		btn.setText("STOP");
+            		StopWatch stopWatch = new StopWatch();
+            		stopWatch.startTimer();
+            		Thread th = new Thread(stopWatch);
+            		th.start();
+            	}else if(btn.getText().equals("STOP")){
+            		btn.setText("START");
+            	}
+//              System.out.println("Hello World!");
             }
         });
         

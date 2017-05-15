@@ -77,17 +77,30 @@ public class MyStringOperations {
 		return first;
 
 	}
-
+	/*	
+	 * Reverse a Sentence not words.
+	 * for example : this is a boy
+	 * Ans: boy a is this
+	 * 
+	 */
 	public String reverseString1(String str){
+//		Split all words with space
+		
 		String[] temp = str.split(" ");
 		str="";
+//		Read from last and add to str
 		for(int i=temp.length-1;i>0;i--){
 			str = str+ temp[i]+" ";
 		}
 		str = str+temp[0];		
 		return str;
 	}
-	
+/*	
+ * Reverse a Sentence not words.
+ * for example : this is a boy
+ * Ans: boy a is this
+ * 
+ */
 	public String reverseString2(String str){
 		StringBuffer sb = new StringBuffer(str);
 		int startIndex,endIndex;
@@ -119,7 +132,74 @@ public class MyStringOperations {
 		return str;
 	}
 	
+	public String findLongestPalindrom(String str){
+		String palind="",temp=null;
+		
+		if(str==null){
+			return  str;
+		}
+		if(str.isEmpty()){
+			return str;
+		}
+		if(str.length()==1){
+			return str;
+		}
+		for (int i = 0; i < str.length()-1; i++) {
+//			get palindrome with center at i
+			temp=getlongestPalindrom(str,i,i);
+			if(temp.length()>palind.length()){
+				palind=temp;
+			}
+			
+//			get palindrome with center at i,i+1
+			temp=getlongestPalindrom(str,i,i+1);
+			if(temp.length()>palind.length()){
+				palind=temp;
+			}
+			
+		}
+		
+		return palind;
+	}
 	
+	private String getlongestPalindrom(String str, int start1, int start2) {
+		
+		while(start1>=0 && start2 <str.length() && str.charAt(start1)==str.charAt(start2)){
+			start1--;
+			start2++;
+		}
+		//need to take care of index as condition fails. palindrome will be from start1 +1 to start2 -1
+		return str.substring(start1+1, start2);
+	}
+
+	public String findLongestCommonSubstring(String str1,String str2){
+		if(str1==null||str2==null){
+			return "";
+		}
+		int len1=str1.length();
+		int len2=str2.length();
+		
+		int[][] sbArray = new int[len1][len2];
+		int max =0,firstindex=0;
+		for(int i=0;i<len1;i++){
+			for(int j=0;j<len2;j++){
+				if(str1.charAt(i)==str2.charAt(j)){
+					if(i==0||j==0){
+						sbArray[i][j]=1;
+					}else {
+						sbArray[i][j]=sbArray[i-1][j+1]+1;
+					}
+					if(max < sbArray[i][j]){
+						max=sbArray[i][j];
+						firstindex=i;
+					}
+				}
+			}
+		}
+		
+		
+		return str1.substring(firstindex-max-1, firstindex);
+	}
 	public static void main(String[] args) {
 		MyStringOperations ms = new MyStringOperations();
 		
@@ -131,8 +211,10 @@ public class MyStringOperations {
 		ms.firstNonRepeatingChar("hello");
 		ms.firstNonRepeatedChar("hello");
 		 */
-		System.out.println(ms.reverseString1("This is  no. 1 player @ forward position"));
-		System.out.println(ms.reverseString2("This is  no. 1 player @ forward position"));
+//		System.out.println(ms.reverseString1("This is  no. 1 player @ forward position"));
+//		System.out.println(ms.reverseString2("This is  no. 1 player @ forward position"));
+		System.out.println(ms.findLongestPalindrom("asdfdkaabbccbbaakfjkff"));
+		System.out.println(ms.findLongestCommonSubstring("asfdfgdh","sdfkjl"));
 	}
 	
 	

@@ -1,8 +1,11 @@
 package com.practice.array;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class PairSum
 {
-    private static final int MAX = 100000; // Max size of Hashmap
+    private static final int MAX = 100000; // Max size of Array
  
     static void printpairs(int arr[],int sum)
     {
@@ -30,5 +33,8 @@ class PairSum
         int A[] = {15,1, 4, 45, 6, 10, 8};
         int n = 16;
         printpairs(A,  n);
+        
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("key", "value");
     }
 }

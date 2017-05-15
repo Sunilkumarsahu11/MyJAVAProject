@@ -1,4 +1,7 @@
 package com.practice.tree;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MyBSTree {
 	public TreeNode root;
@@ -95,6 +98,8 @@ public class MyBSTree {
 		}
 		return minVal;
 	}
+	
+	
 	private TreeNode findNode(TreeNode node,int num) {
 		// TODO Auto-generated method stub
 		if(node==null){
@@ -108,8 +113,6 @@ public class MyBSTree {
 			return findNode(node.right,num);
 		}
 		return node;
-		
-		
 
 	}
 
@@ -147,8 +150,88 @@ public class MyBSTree {
 		}
 	}
 	
+	public void displayRightSideTree(){
+		List<Integer> rightSideView = getRightSideView(root);
+		System.out.println("======================");
+		for (Integer integer : rightSideView) {
+			System.out.print(integer+" ");
+		}
+	}
+	
+	private List<Integer> getRightSideView(TreeNode node){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		if(node==null){
+			return result;
+		}
+		
+		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(node);
+		
+		while(queue.size()>0){
+			int size=queue.size();
+			
+			for (int i = 0; i < size; i++) {
+				TreeNode top = queue.pop();
+				
+				if(i==0){
+					result.add(top.data);
+				}
+				
+				if(top.right!=null){
+					queue.add(top.right);
+				}
+				
+				if(top.left!=null){
+					queue.add(top.left);
+				}
+			}
+		}
+		return result;
+	}
+	
+	// Return maximum element in the path between
+	// two given Node of BST.
+	
+	public int maximumElement(int x, int y){
+		TreeNode temp = root;
+		while((x<temp.data && y < temp.data)||(x>temp.data && y>temp.data)){
+			if(x<temp.data && y < temp.data){
+				temp=temp.left;
+			}else if(x>temp.data && y>temp.data){
+				temp=temp.right;
+			}
+
+		}
+		int maxX=maxElement(temp,x);
+		int maxY=maxElement(temp,y);
+		return maxX>maxY?maxX:maxY;
+		
+		
+	}
+	
+	private int maxElement(TreeNode node, int x) {
+		// TODO Auto-generated method stub
+		TreeNode temp = node;
+		int max = node.data;
+		while(temp.data!=x){
+			if(x>temp.data){
+				if(temp.data > max){
+					max=temp.data;
+				}
+				temp=temp.right;
+			}
+			if(x<temp.data){
+				if(max < temp.data){
+					max=temp.data;
+				}
+				temp=temp.left;
+			}
+		}
+		return max>x?max:x;
+	}
+
 	public static void main(String arg[]){
-		int [] a = {3,8,1,4,6,2,10,9,20,25,15,16};
+		int [] a = {11,8,1,3,4,6,2,10,9,20,25,13,15,16};
 		MyBSTree b = new MyBSTree();
 		/*b.addNode(3);b.addNode(8);
 		b.addNode(1);b.addNode(4);b.addNode(6);b.addNode(2);b.addNode(10);b.addNode(9);
@@ -159,6 +242,7 @@ public class MyBSTree {
 		System.out.println("Original Tree : ");
 		b.printInOrderBSTree(b.root);		
 		System.out.println("");
+		System.out.println("max between  "+ b.maximumElement(7,11));
 		System.out.println("Check whether Node with value 4 exists : " + b.find(4));
 		System.out.println("Delete Node with no children (2) " );
 		b.deleteNode(2);		
@@ -169,8 +253,9 @@ public class MyBSTree {
 		System.out.println("\n Delete Node with Two children (10)  " );
 		b.deleteNode(10);		
 		b.printInOrderBSTree(b.root);
-		
-		
+		System.out.println("");
+		b.printPostOrderBSTree(b.root);
+		b.displayRightSideTree();
 		
 	}
 }
