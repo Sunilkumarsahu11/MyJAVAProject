@@ -110,6 +110,7 @@ public class MyStringOperations {
 				i++;
 			}
 			endIndex=i==str.length()-1?i:i-1;
+			//reverse the word in place
 			while(startIndex<endIndex){
 				char ch = sb.charAt(startIndex);
 				sb.setCharAt(startIndex, sb.charAt(endIndex));
@@ -203,14 +204,15 @@ public class MyStringOperations {
 	public static void main(String[] args) {
 		MyStringOperations ms = new MyStringOperations();
 		
-		/*
-		 * ms.setS1("Hello");
-		 * ms.setS2("World"); System.out.println("before");
-		 * ms.displayTwoSrings(); ms.swapTwoStrings();
-		 * System.out.println("after"); ms.displayTwoSrings();
+
+		ms.setS1("Hello");
+		ms.setS2("World");
+		System.out.println("before");
+		ms.displayTwoSrings(); ms.swapTwoStrings();
+		System.out.println("after"); ms.displayTwoSrings();
 		ms.firstNonRepeatingChar("hello");
 		ms.firstNonRepeatedChar("hello");
-		 */
+
 //		System.out.println(ms.reverseString1("This is  no. 1 player @ forward position"));
 //		System.out.println(ms.reverseString2("This is  no. 1 player @ forward position"));
 		System.out.println(ms.findLongestPalindrom("asdfdkaabbccbbaakfjkff"));
